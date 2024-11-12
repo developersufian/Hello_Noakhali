@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorBlue">#1E88E5</color>
+    <color name="colorGreen">#43A047</color>
+    <color name="colorRed">#E53935</color>
+
+
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#FF5722</color> <!-- Deep Orange -->
+    <color name="colorPrimaryVariant">#E64A19</color> <!-- Darker shade -->
+    <color name="colorAccent">#FFC107</color> <!-- Amber -->
+
+    <!-- Background Colors -->
+    <color name="colorBackgroundLight">#FAFAFA</color> <!-- Light Gray -->
+    <color name="colorBackgroundDark">#263238</color> <!-- Dark Blue Gray -->
+
+    <!-- Surface Colors -->
+    <color name="colorSurfaceLight">#FFFFFF</color> <!-- Pure White -->
+    <color name="colorSurfaceDark">#37474F</color> <!-- Darker Blue Gray -->
+    <color name="colorDrawerBackground">#263238</color> <!-- Dark Blue Gray -->
+    <color name="colorDrawerBackgroundDark">#263238</color> <!-- Dark Blue Gray -->
+    <color name="colorTextLight">#FFFFFF</color> <!-- White for text -->
+    <color name="colorDrawerBackgroundLight">#FAFAFA</color> <!-- Very Light Gray -->
+    <color name="colorTextDark">#212121</color> <!-- Almost Black -->
+
+
+
+    <!-- Text Colors -->
+    <color name="colorTextPrimary">#212121</color> <!-- Almost Black -->
+    <color name="colorTextSecondary">#757575</color> <!-- Medium Gray -->
+    <color name="colorTextOnDark">#FFFFFF</color> <!-- White for Dark Backgrounds -->
+
+
+    <!-- Additional Accent Colors -->
+    <color name="colorError">#D32F2F</color> <!-- Red for errors -->
+    <color name="colorSuccess">#388E3C</color> <!-- Green for success -->
+    <color name="colorWarning">#FFA000</color> <!-- Amber for warnings -->
+    <color name="colorInfo">#1976D2</color> <!-- Blue for informational messages -->
+
+    <!-- Supporting Colors -->
+    <color name="colorBlueLight">#03A9F4</color> <!-- Light Blue -->
+    <color name="colorPurple">#9C27B0</color> <!-- Deep Purple -->
+    <color name="colorGreenLight">#8BC34A</color> <!-- Light Green -->
+    <color name="colorYellow">#FFEB3B</color> <!-- Bright Yellow -->
+
+    <!-- Neutral Colors -->
+    <color name="colorGrayLight">#EEEEEE</color>
+    <color name="colorGrayDark">#424242</color>
+</resources>

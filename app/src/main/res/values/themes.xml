@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.HelloNoakhali" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Background and Surface Colors -->
+        <item name="android:colorBackground">@color/colorBackgroundLight</item>
+        <item name="colorSurface">@color/colorSurfaceLight</item>
+        <item name="colorOnSurface">@color/colorTextPrimary</item>
+        <item name="colorOnPrimary">@color/colorTextOnDark</item>
+
+        <!-- Error and Success Colors -->
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorTextOnDark</item>
+
+    </style>
+
+    <!-- res/values/themes.xml -->
+
+
+
+    <style name="Theme.HelloNoakhali" parent="Base.Theme.HelloNoakhali" />
+</resources>
