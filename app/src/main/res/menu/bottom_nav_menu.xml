@@ -1,5 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_home" android:title="Home" android:icon="@drawable/baseline_home_24"/>
-    <item android:id="@+id/nav_profile" android:title="Profile" android:icon="@drawable/baseline_home_24"/>
-    <item android:id="@+id/nav_settings" android:title="Settings" android:icon="@drawable/baseline_home_24"/>
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_news"
+        android:icon="@drawable/baseline_newspaper_24"
+        android:title="News" />
+    <item
+        android:id="@+id/nav_blood_request"
+        android:icon="@drawable/baseline_bloodtype_24"
+        android:title="Blood Request" />
+    <item
+        android:id="@+id/nav_blood_donar"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Blood Donar" />
 </menu>
