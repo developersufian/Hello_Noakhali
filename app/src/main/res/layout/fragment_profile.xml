@@ -1,18 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSuccess"
-    tools:context=".fragment.ProfileFragment">
+    android:background="@color/colorPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/profile_bg"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/amita_regular"
+            android:paddingHorizontal="4dp"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="44dp"
+            android:fontFamily="@font/gabriela_regular"
+            android:paddingHorizontal="4dp"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/img_profile"
+        android:layout_marginTop="-20dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="20dp">
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_reg_donor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello_noakhali_profile"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorAccent" />
-
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorBackgroundLight"
+        android:text="register as a Blood Donor"
+        android:textColor="@color/colorTextDark"
+        android:textSize="16sp" />
 
 </RelativeLayout>

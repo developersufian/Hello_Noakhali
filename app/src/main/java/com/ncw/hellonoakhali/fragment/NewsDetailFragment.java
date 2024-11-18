@@ -59,40 +59,37 @@ public class NewsDetailFragment extends Fragment {
     }
 
     private void loadNewsDetails(String newsId) {
-        String url = "http://192.168.0.105/Hello_Noakhali/news_id.php?id=" + newsId;  // Use the news ID in the URL
+        String url = getString(R.string.web_url) + "news_id.php?id=" + newsId;  // Use the news ID in the URL
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONObject data = response.getJSONObject("data");
+                response -> {
+                    try {
+                        JSONObject data = response.getJSONObject("data");
 
-                            // Extract data from the response
-                            String title = data.getString("title");
-                            String content = data.getString("content");
-                            String author = data.getString("author");
-                            String category = data.getString("category");
-                            String tags = data.getString("tags");
-                            String views = data.getString("views");
-                            String imageUrl = data.getString("image_url");
+                        // Extract data from the response
+                        String title = data.getString("title");
+                        String content = data.getString("content");
+                        String author = data.getString("author");
+                        String category = data.getString("category");
+                        String tags = data.getString("tags");
+                        String views = data.getString("views");
+                        String imageUrl = data.getString("image_url");
 
-                            // Set the data to the views
-                            titleTextView.setText(title);
-                            contentTextView.setText(content);
-                            authorTextView.setText("Author: " + author);
-                            categoryTextView.setText("Category: " + category);
-                            tagsTextView.setText("Tags: " + tags);
-                            viewsTextView.setText("Views: " + views);
+                        // Set the data to the views
+                        titleTextView.setText(title);
+                        contentTextView.setText(content);
+                        authorTextView.setText("Author: " + author);
+                        categoryTextView.setText("Category: " + category);
+                        tagsTextView.setText("Tags: " + tags);
+                        viewsTextView.setText("Views: " + views);
 
-                            // Load the image using Glide
-                            Glide.with(getContext())
-                                    .load(imageUrl)
-                                    .into(newsImageView);
+                        // Load the image using Glide
+                        Glide.with(getContext())
+                                .load(imageUrl)
+                                .into(newsImageView);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
                 new Response.ErrorListener() {

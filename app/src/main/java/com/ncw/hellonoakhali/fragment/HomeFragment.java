@@ -55,8 +55,8 @@ public class HomeFragment extends Fragment {
 
     private static class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderItemViewHolder> {
 
-        private Context context;
-        private List<SliderItem> sliderItemList;
+        private final Context context;
+        private final List<SliderItem> sliderItemList;
 
         public SliderAdapter(Context context, List<SliderItem> sliderItemList) {
             this.context = context;

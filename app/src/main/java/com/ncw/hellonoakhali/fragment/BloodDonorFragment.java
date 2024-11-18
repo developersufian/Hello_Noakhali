@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment;
 
 import com.ncw.hellonoakhali.R;
 
-public class BloodDonarFragment extends Fragment {
+public class BloodDonorFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blood_donar, container, false);
+        return inflater.inflate(R.layout.fragment_blood_donor, container, false);
     }
 }

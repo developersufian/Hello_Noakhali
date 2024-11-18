@@ -58,42 +58,34 @@ public class NewsFragment extends Fragment implements NewsAdapter.OnNewsItemClic
     }
 
     private void loadNews() {
-        String url = "http://192.168.0.105/Hello_Noakhali/news.php"; // Your API URL here
+        String url = getString(R.string.web_url) + "news.php"; // Your API URL here
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray newsArray = response.getJSONArray("data");
+                response -> {
+                    try {
+                        JSONArray newsArray = response.getJSONArray("data");
 
-                            for (int i = 0; i < newsArray.length(); i++) {
-                                JSONObject newsJson = newsArray.getJSONObject(i);
-                                News news = new News();
-                                news.setId(newsJson.getString("id"));
-                                news.setTitle(newsJson.getString("title"));
-                                news.setContent(newsJson.getString("content"));
-                                news.setAuthor(newsJson.getString("author"));
-                                news.setCategory(newsJson.getString("category"));
-                                news.setImageUrl(newsJson.getString("image_url"));
-                                news.setPublishedAt(newsJson.getString("published_at"));
-                                news.setViews(newsJson.getString("views"));
+                        for (int i = 0; i < newsArray.length(); i++) {
+                            JSONObject newsJson = newsArray.getJSONObject(i);
+                            News news = new News();
+                            news.setId(newsJson.getString("id"));
+                            news.setTitle(newsJson.getString("title"));
+                            news.setContent(newsJson.getString("content"));
+                            news.setAuthor(newsJson.getString("author"));
+                            news.setCategory(newsJson.getString("category"));
+                            news.setImageUrl(newsJson.getString("image_url"));
+                            news.setPublishedAt(newsJson.getString("published_at"));
+                            news.setViews(newsJson.getString("views"));
 
-                                newsList.add(news);
-                            }
-
-                            adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            newsList.add(news);
                         }
+
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                });
+                error -> error.printStackTrace());
 
         requestQueue.add(request);
     }

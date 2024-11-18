@@ -15,8 +15,8 @@ import com.ncw.hellonoakhali.model.News;
 import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
-    private List<News> newsList;
-    private OnNewsItemClickListener mListener;
+    private final List<News> newsList;
+    private final OnNewsItemClickListener mListener;
 
     // Constructor
     public NewsAdapter(List<News> newsList, OnNewsItemClickListener listener) {
@@ -37,6 +37,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.author.setText("Author: " + news.getAuthor());
         holder.views.setText("Views: " + news.getViews());
         holder.publishedAt.setText("Published at: " + news.getPublishedAt());
+        holder.content.setText(news.getContent());
 
         // Use Glide to load the image
         Glide.with(holder.itemView.getContext())
@@ -53,7 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
-        TextView title, author, views, publishedAt;
+        TextView title, author, views, publishedAt, content;
         ImageView image;
 
         public NewsViewHolder(View itemView) {
@@ -63,6 +64,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             views = itemView.findViewById(R.id.views);
             image = itemView.findViewById(R.id.image);
             publishedAt = itemView.findViewById(R.id.publishedAt);
+            content = itemView.findViewById(R.id.content);
         }
     }
 

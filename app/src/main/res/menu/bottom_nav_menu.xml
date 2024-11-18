@@ -12,7 +12,7 @@
         android:icon="@drawable/baseline_bloodtype_24"
         android:title="Blood Request" />
     <item
-        android:id="@+id/nav_blood_donar"
+        android:id="@+id/nav_blood_donor"
         android:icon="@drawable/baseline_person_24"
-        android:title="Blood Donar" />
+        android:title="Blood Donor" />
 </menu>
