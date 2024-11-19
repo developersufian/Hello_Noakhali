@@ -1,6 +1,7 @@
 package com.ncw.hellonoakhali.fragment;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,13 +24,18 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ncw.hellonoakhali.DonorRegisterActivity;
 import com.ncw.hellonoakhali.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
@@ -39,6 +45,8 @@ public class ProfileFragment extends Fragment {
     private ImageView ivProfilePicture;
     private LinearLayout layContent;
     private Button btnRegDonor;
+
+    DateCalculator dateCalculator;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,12 +67,28 @@ public class ProfileFragment extends Fragment {
             checkIfUserExistsInDatabase(user.getUid());
         }
 
-        btnRegDonor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //goto register activity with user id name email and photo url
+        btnRegDonor.setOnClickListener(v -> {
+            //goto donor register activity with user id name email and photo url as intent extra
+            // Inside your current activity
+            Intent intent = new Intent(getContext(), DonorRegisterActivity.class);
 
+            // Add data to intent
+            intent.putExtra("USER_ID", user.getUid());
+            intent.putExtra("NAME", user.getDisplayName());
+            intent.putExtra("EMAIL", user.getEmail());
+
+            if (user.getPhotoUrl() != null) {
+                intent.putExtra("PHOTO_URL", user.getPhotoUrl().toString());
+                Log.d("PHOTO_URL", "User photo URL: " + user.getPhotoUrl());
+            } else {
+                Log.e("PHOTO_URL", "User photo URL is null");
             }
+
+
+            // Start the activity
+            startActivity(intent);
+
+
         });
 
 
@@ -92,7 +116,6 @@ public class ProfileFragment extends Fragment {
         JSONObject jsonObject = new JSONObject(new HashMap<String, String>() {{
             put("user_id", userId);
         }});
-
         makeVolleyRequest(url, jsonObject, response -> {
             try {
                 if (response.getBoolean("success")) {
@@ -102,7 +125,6 @@ public class ProfileFragment extends Fragment {
                     } else {
                         handleUserNotFound();
                     }
-
                 } else {
                     handleError(response.getString("error"));
                 }
@@ -115,31 +137,48 @@ public class ProfileFragment extends Fragment {
     private void handleUserFound(JSONObject userData) throws JSONException {
         // Access and display user data
 
-        //id`, `user_id`, `name`, `email`, `age`, `blood_group`, `location`, `registration_date`, `phone`, `facebook`, `last_donation_date`, `total_donation_time`
-        String id = userData.getString("id");
         String name = userData.getString("name");
         String email = userData.getString("email");
         String bloodGroup = userData.getString("blood_group");  // Note: key from the database
-        String location = userData.getString("location");
+        String address = userData.getString("address");
         String registrationDate = userData.getString("registration_date");
         String phone = userData.getString("phone");
         String facebook = userData.getString("facebook");
         String lastDonationDate = userData.getString("last_donation_date");
-        String totalDonationTime = userData.getString("total_donation_time");
-        String age = userData.getString("age");
+        String totalDonationTime = userData.getString("total_donated");
+        String dob = userData.getString("dob");
         String userId = userData.getString("user_id");
+        String photoUrl = userData.getString("photo_url");
 
-        //Toast.makeText(getContext(), "User found: Name " + name + ", Email " + email + " Age " + age + " Blood Group " + bloodGroup + " Location " + location + "", Toast.LENGTH_SHORT).show();
+        dateCalculator = new DateCalculator(dob, lastDonationDate);
+
 
         //tvName.setText(name);
         //tvEmail.setText(email);
 
 
-        // ... (Use the data to populate your UI elements) ...
-
         layContent.setVisibility(View.VISIBLE);
         btnRegDonor.setVisibility(View.GONE);
-        Log.d(TAG, "User found: " + name + ", " + email + ", etc.");  // Log or display the data as needed
+        Log.d("UserData", "User: " + userId);
+        Log.d("UserData", "Name: " + name);
+        Log.d("UserData", "Email: " + email);
+        Log.d("UserData", "Blood Group: " + bloodGroup);
+        Log.d("UserData", "Address: " + address);
+        Log.d("UserData", "Registration Date: " + registrationDate);
+        Log.d("UserData", "Phone: " + phone);
+        Log.d("UserData", "Facebook: " + facebook);
+        Log.d("UserData", "Last Donation Date: " + lastDonationDate);
+        Log.d("UserData", "Total Donation Time: " + totalDonationTime);
+        Log.d("UserData", "DOB: " + dob);
+        Log.d("UserData", "Photo URL: " + photoUrl);
+
+
+        //Last Donation Date: 19-11-2024 to today, total days
+        //DOB: 30-07-2005 to today total years
+
+        Log.d("UserData", "Days since last donation: " + dateCalculator.getDaysSinceLastDonation());
+        Log.d("UserData", "Age: " + dateCalculator.getAge());
+
 
     }
 
@@ -151,16 +190,8 @@ public class ProfileFragment extends Fragment {
     }
 
 
-// ... rest of your Java code (makeVolleyRequest, handleError, etc.)
-
-
-// ... rest of your Java code (makeVolleyRequest, handleError, etc.)
-
-
     private void makeVolleyRequest(String url, JSONObject jsonObject, com.android.volley.Response.Listener<JSONObject> listener) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                listener,
-                error -> handleError(error.getMessage())) {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, listener, error -> handleError(error.getMessage())) {
             @Override
             public Map<String, String> getHeaders() {
                 return new HashMap<String, String>() {{
@@ -174,5 +205,52 @@ public class ProfileFragment extends Fragment {
     private void handleError(String errorMessage) {
         Log.e(TAG, errorMessage);
         Toast.makeText(getContext(), "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    private static class DateCalculator {
+        private final String birthDate;
+        private final String donationDate;
+
+        public DateCalculator(String birthDate, String donationDate) {
+            this.birthDate = birthDate;
+            this.donationDate = donationDate;
+        }
+
+        public long getDaysSinceLastDonation() {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                Date lastDonationDate = sdf.parse(donationDate);
+                Date currentDate = new Date();
+
+                long diffInMillis = currentDate.getTime() - lastDonationDate.getTime();
+                return TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+
+        public int getAge() {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                Date birthDate = sdf.parse(this.birthDate);
+
+                Calendar dob = Calendar.getInstance();
+                Calendar today = Calendar.getInstance();
+
+                dob.setTime(birthDate);
+
+                int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+                if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+                    age--;
+                }
+
+                return age;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
     }
 }

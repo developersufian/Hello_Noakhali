@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/arrows"
+        app:titleTextColor="@android:color/white" />
+
 
     <ImageView
         android:id="@+id/newsImageView"
@@ -15,57 +29,56 @@
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="18sp"
-        android:textColor="@color/black"
         android:fontFamily="sans-serif"
-        android:paddingTop="8dp"
         android:paddingStart="8dp"
+        android:paddingTop="8dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="8dp" />
-
+        android:paddingBottom="8dp"
+        android:text="Title"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 
     <TextView
         android:id="@+id/authorTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="4dp"
         android:text="Author"
-        android:textSize="14sp"
-        android:padding="4dp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/categoryTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="8dp"
         android:text="Category"
-        android:textSize="14sp"
-        android:paddingTop="8dp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tagsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="8dp"
         android:text="Tags"
-        android:textSize="12sp"
-        android:paddingTop="8dp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/viewsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="Views"
-        android:textSize="12sp"
         android:textColor="@android:color/darker_gray"
-        android:padding="8dp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/contentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         android:paddingTop="8dp"
+        android:paddingEnd="8dp"
         android:paddingBottom="8dp"
         android:text="Content"
         android:textSize="16sp" />

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +55,17 @@ public class NewsFragment extends Fragment implements NewsAdapter.OnNewsItemClic
 
         requestQueue = Volley.newRequestQueue(getContext());
         loadNews();
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+            if (((AppCompatActivity) requireActivity()).getSupportActionBar() != null) {
+                ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Fragment Toolbar");
+            }
+
+            // Handle back button click
+            toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
+        }
 
         return view;
     }

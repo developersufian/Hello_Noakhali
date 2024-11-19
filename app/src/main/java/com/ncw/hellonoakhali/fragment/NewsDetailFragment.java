@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -34,8 +36,7 @@ public class NewsDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news_detail, container, false);
 
@@ -54,50 +55,58 @@ public class NewsDetailFragment extends Fragment {
         // Initialize the RequestQueue for making network requests
         requestQueue = Volley.newRequestQueue(getContext());
         loadNewsDetails(newsId);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+            if (((AppCompatActivity) requireActivity()).getSupportActionBar() != null) {
+                ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+
+            // Handle back button click
+            toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
+        }
 
         return view;
     }
 
+
+
     private void loadNewsDetails(String newsId) {
         String url = getString(R.string.web_url) + "news_id.php?id=" + newsId;  // Use the news ID in the URL
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        JSONObject data = response.getJSONObject("data");
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONObject data = response.getJSONObject("data");
 
-                        // Extract data from the response
-                        String title = data.getString("title");
-                        String content = data.getString("content");
-                        String author = data.getString("author");
-                        String category = data.getString("category");
-                        String tags = data.getString("tags");
-                        String views = data.getString("views");
-                        String imageUrl = data.getString("image_url");
+                // Extract data from the response
+                String title = data.getString("title");
+                String content = data.getString("content");
+                String author = data.getString("author");
+                String category = data.getString("category");
+                String tags = data.getString("tags");
+                String views = data.getString("views");
+                String imageUrl = data.getString("image_url");
 
-                        // Set the data to the views
-                        titleTextView.setText(title);
-                        contentTextView.setText(content);
-                        authorTextView.setText("Author: " + author);
-                        categoryTextView.setText("Category: " + category);
-                        tagsTextView.setText("Tags: " + tags);
-                        viewsTextView.setText("Views: " + views);
+                // Set the data to the views
+                titleTextView.setText(title);
+                contentTextView.setText(content);
+                authorTextView.setText("Author: " + author);
+                categoryTextView.setText("Category: " + category);
+                tagsTextView.setText("Tags: " + tags);
+                viewsTextView.setText("Views: " + views);
 
-                        // Load the image using Glide
-                        Glide.with(getContext())
-                                .load(imageUrl)
-                                .into(newsImageView);
+                // Load the image using Glide
+                Glide.with(getContext()).load(imageUrl).into(newsImageView);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
 
         // Add the request to the Volley request queue
         requestQueue.add(request);

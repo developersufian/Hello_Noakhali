@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gabriela_regular"
                         android:layout_marginEnd="8dp"
-                        android:text="hello"
+                        android:text=""
                         android:paddingHorizontal="4dp"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
