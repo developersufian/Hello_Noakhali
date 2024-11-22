@@ -2,21 +2,44 @@ package com.ncw.hellonoakhali.model;
 
 
 public class News {
-    private String id;
+
+    private int id;
     private String title;
     private String content;
     private String author;
     private String category;
     private String imageUrl;
     private String publishedAt;
-    private String views;
+    private String updatedAt;
+    private String status;
+    private String tags;
+    private int views;
+    private int isFeatured;
 
-    // Getters and setters
-    public String getId() {
+    // Constructor
+    public News(int id, String title, String content, String author, String category,
+                String imageUrl, String publishedAt, String updatedAt, String status,
+                String tags, int views, int isFeatured) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.category = category;
+        this.imageUrl = imageUrl;
+        this.publishedAt = publishedAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
+        this.tags = tags;
+        this.views = views;
+        this.isFeatured = isFeatured;
+    }
+
+    // Getter and Setter methods
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -68,11 +91,43 @@ public class News {
         this.publishedAt = publishedAt;
     }
 
-    public String getViews() {
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public int getViews() {
         return views;
     }
 
-    public void setViews(String views) {
+    public void setViews(int views) {
         this.views = views;
+    }
+
+    public int isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(int featured) {
+        isFeatured = featured;
     }
 }

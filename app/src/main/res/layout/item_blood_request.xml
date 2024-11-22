@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/patientIssue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient Issue"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/patientAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient Age"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/patientGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient Gender"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bloodGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Group"
+            android:textColor="@color/colorRed"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/urgency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urgency: High"
+            android:textColor="@color/colorSuccess"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:id="@+id/hemoglobin_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hemoglobin Level"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/date_and_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date and Time"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/requiredAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Required Amount"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/hospitalName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospital Name"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/contactInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Info"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/requestDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request Date"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/additionalNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Additional Notes"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/reference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reference"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,14 +1,12 @@
 package com.ncw.hellonoakhali.fragment;
 
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.ncw.hellonoakhali.R;
 import com.ncw.hellonoakhali.adapters.NewsAdapter;
@@ -55,17 +53,6 @@ public class NewsFragment extends Fragment implements NewsAdapter.OnNewsItemClic
 
         requestQueue = Volley.newRequestQueue(getContext());
         loadNews();
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-            if (((AppCompatActivity) requireActivity()).getSupportActionBar() != null) {
-                ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Fragment Toolbar");
-            }
-
-            // Handle back button click
-            toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
-        }
 
         return view;
     }
@@ -73,41 +60,56 @@ public class NewsFragment extends Fragment implements NewsAdapter.OnNewsItemClic
     private void loadNews() {
         String url = getString(R.string.web_url) + "news.php"; // Your API URL here
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        // Create a JsonArrayRequest to fetch data
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        JSONArray newsArray = response.getJSONArray("data");
+                        // Clear the existing list to prevent duplication
+                        newsList.clear();
 
-                        for (int i = 0; i < newsArray.length(); i++) {
-                            JSONObject newsJson = newsArray.getJSONObject(i);
-                            News news = new News();
-                            news.setId(newsJson.getString("id"));
-                            news.setTitle(newsJson.getString("title"));
-                            news.setContent(newsJson.getString("content"));
-                            news.setAuthor(newsJson.getString("author"));
-                            news.setCategory(newsJson.getString("category"));
-                            news.setImageUrl(newsJson.getString("image_url"));
-                            news.setPublishedAt(newsJson.getString("published_at"));
-                            news.setViews(newsJson.getString("views"));
+                        // Loop through the response and parse each news article
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject jsonObject = response.getJSONObject(i);
 
+                            int id = jsonObject.getInt("id");
+                            String title = jsonObject.getString("title");
+                            String content = jsonObject.getString("content");
+                            String author = jsonObject.getString("author");
+                            String category = jsonObject.getString("category");
+                            String imageUrl = jsonObject.getString("image_url");
+                            String publishedAt = jsonObject.getString("published_at");
+                            String updatedAt = jsonObject.getString("updated_at");
+                            String status = jsonObject.getString("status");
+                            String tags = jsonObject.getString("tags");
+                            int views = jsonObject.getInt("views");
+                            int isFeatured = jsonObject.getInt("is_featured");
+
+                            // Create a News object and add it to the list
+                            News news = new News(id, title, content, author, category, imageUrl,
+                                    publishedAt, updatedAt, status, tags, views, isFeatured);
                             newsList.add(news);
                         }
 
+                        // Notify the adapter that the data set has changed
                         adapter.notifyDataSetChanged();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText(getActivity(), "Failed to parse response", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> error.printStackTrace());
+                error -> {
+                    Toast.makeText(getActivity(), "Error fetching data", Toast.LENGTH_SHORT).show();
+                    Log.e("Volley Error", error.getMessage());
+                });
 
-        requestQueue.add(request);
+        // Add the request to the Volley queue
+        requestQueue.add(jsonArrayRequest);
     }
 
     @Override
     public void onNewsItemClick(String newsId) {
         // Handle the click event and pass the ID
-
-        // You can open a new fragment or activity and pass the news ID
         Bundle bundle = new Bundle();
         bundle.putString("newsId", newsId);  // Pass the news ID
         NewsDetailFragment detailFragment = new NewsDetailFragment();

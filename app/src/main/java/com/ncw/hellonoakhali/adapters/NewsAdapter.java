@@ -13,6 +13,7 @@ import com.ncw.hellonoakhali.R;
 import com.ncw.hellonoakhali.model.News;
 
 import java.util.List;
+
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private final List<News> newsList;
@@ -45,7 +46,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 .into(holder.image);
 
         // Handle item click and pass the ID
-        holder.itemView.setOnClickListener(v -> mListener.onNewsItemClick(news.getId()));
+        holder.itemView.setOnClickListener(v -> mListener.onNewsItemClick(String.valueOf(news.getId())));  // Pass the ID as String
     }
 
     @Override
@@ -70,6 +71,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     // Interface to handle item click
     public interface OnNewsItemClickListener {
-        void onNewsItemClick(String newsId);  // Pass only the ID
+        void onNewsItemClick(String newsId);  // Pass only the ID as String
     }
 }
