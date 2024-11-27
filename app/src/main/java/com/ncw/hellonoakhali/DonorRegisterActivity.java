@@ -38,7 +38,7 @@ import java.util.Map;
 public class DonorRegisterActivity extends AppCompatActivity {
 
     private ImageView userPhoto;
-    private EditText nameField, phoneNumber, address, date_of_birth, last_date_of_donation, total_donated, facebook;
+    private EditText nameField, phoneNumber, address, date_of_birth, last_date_of_donation, total_donated, facebook, height, weight;
     private Spinner bloodGroup;
     private Button registerButton;
     private String userId;
@@ -99,6 +99,8 @@ public class DonorRegisterActivity extends AppCompatActivity {
         last_date_of_donation = findViewById(R.id.last_date_of_donation);
         total_donated = findViewById(R.id.total_donated);
         facebook = findViewById(R.id.facebook);
+        height = findViewById(R.id.height);
+        weight = findViewById(R.id.weight);
 
     }
 
@@ -113,6 +115,8 @@ public class DonorRegisterActivity extends AppCompatActivity {
             String phone = phoneNumber.getText().toString();
             String addres = address.getText().toString();
             String name = nameField.getText().toString();
+            String height = this.height.getText().toString();
+            String weight = this.weight.getText().toString();
 
 
             Map<String, Object> donorData = new HashMap<>();
@@ -125,6 +129,8 @@ public class DonorRegisterActivity extends AppCompatActivity {
             donorData.put("facebook_link", facebookLink);
             donorData.put("phone_number", phone);
             donorData.put("address", addres);
+            donorData.put("height", height);
+            donorData.put("weight", weight);
 
 
             // mysql database
@@ -146,6 +152,8 @@ public class DonorRegisterActivity extends AppCompatActivity {
                 postData.put("address", address);
                 postData.put("email", email);
                 postData.put("photo_url", photoUrl);
+                postData.put("height", height);
+                postData.put("weight", weight);
 
                 // Creating the request
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -243,6 +251,15 @@ public class DonorRegisterActivity extends AppCompatActivity {
 
         if (nameField.getText().toString().isEmpty()) {
             nameField.setError("Name is required");
+            return false;
+        }
+
+        if (height.getText().toString().isEmpty()) {
+            height.setError("Height is required");
+            return false;
+        }
+        if (weight.getText().toString().isEmpty()) {
+            weight.setError("Weight is required");
             return false;
         }
 

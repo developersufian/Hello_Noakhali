@@ -1,7 +1,9 @@
 package com.ncw.hellonoakhali.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,7 +43,7 @@ public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private TextView tvName, tvEmail;
+    private TextView tvName, tvEmail, tvBloodGroup, tvAddress, tvPhone, tvLastDonationDate, tvTotalDonationTime, tvAge, tvHeight, tvWeight;
     private ImageView ivProfilePicture;
     private LinearLayout layContent;
     private Button btnRegDonor;
@@ -60,6 +62,15 @@ public class ProfileFragment extends Fragment {
         ivProfilePicture = view.findViewById(R.id.img_profile);
         layContent = view.findViewById(R.id.lay_content);
         btnRegDonor = view.findViewById(R.id.btn_reg_donor);
+        tvBloodGroup = view.findViewById(R.id.blood_group);
+        tvAddress = view.findViewById(R.id.address);
+        tvPhone = view.findViewById(R.id.phone);
+        tvLastDonationDate = view.findViewById(R.id.last_donation);
+        tvTotalDonationTime = view.findViewById(R.id.total_donations);
+        tvAge = view.findViewById(R.id.age);
+        tvHeight = view.findViewById(R.id.height);
+        tvWeight = view.findViewById(R.id.weight);
+
 
         loadUserInfo();
 
@@ -134,51 +145,43 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+
     private void handleUserFound(JSONObject userData) throws JSONException {
         // Access and display user data
 
-        String name = userData.getString("name");
-        String email = userData.getString("email");
+        //String name = userData.getString("name");
+        //String email = userData.getString("email");
         String bloodGroup = userData.getString("blood_group");  // Note: key from the database
         String address = userData.getString("address");
-        String registrationDate = userData.getString("registration_date");
+        //String registrationDate = userData.getString("registration_date");
         String phone = userData.getString("phone");
-        String facebook = userData.getString("facebook");
+        //String facebook = userData.getString("facebook");
         String lastDonationDate = userData.getString("last_donation_date");
         String totalDonationTime = userData.getString("total_donated");
         String dob = userData.getString("dob");
-        String userId = userData.getString("user_id");
-        String photoUrl = userData.getString("photo_url");
+        String height = userData.getString("height");
+        String weight = userData.getString("weight");
+        //String userId = userData.getString("user_id");
+        //String photoUrl = userData.getString("photo_url");
 
         dateCalculator = new DateCalculator(dob, lastDonationDate);
 
+        tvBloodGroup.setText(bloodGroup);
+        tvAddress.setText(address);
+        tvPhone.setText(phone);
+        tvLastDonationDate.setText(dateCalculator.getDaysSinceLastDonation() + " Days ago");
+        tvTotalDonationTime.setText(totalDonationTime + " Times");
+        tvAge.setText(dateCalculator.getAge() + " Years");
+        tvHeight.setText(height);
+        tvWeight.setText(weight+" Kg");
 
-        //tvName.setText(name);
-        //tvEmail.setText(email);
-
+        tvPhone.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+            startActivity(intent);
+        });
 
         layContent.setVisibility(View.VISIBLE);
         btnRegDonor.setVisibility(View.GONE);
-        Log.d("UserData", "User: " + userId);
-        Log.d("UserData", "Name: " + name);
-        Log.d("UserData", "Email: " + email);
-        Log.d("UserData", "Blood Group: " + bloodGroup);
-        Log.d("UserData", "Address: " + address);
-        Log.d("UserData", "Registration Date: " + registrationDate);
-        Log.d("UserData", "Phone: " + phone);
-        Log.d("UserData", "Facebook: " + facebook);
-        Log.d("UserData", "Last Donation Date: " + lastDonationDate);
-        Log.d("UserData", "Total Donation Time: " + totalDonationTime);
-        Log.d("UserData", "DOB: " + dob);
-        Log.d("UserData", "Photo URL: " + photoUrl);
-
-
-        //Last Donation Date: 19-11-2024 to today, total days
-        //DOB: 30-07-2005 to today total years
-
-        Log.d("UserData", "Days since last donation: " + dateCalculator.getDaysSinceLastDonation());
-        Log.d("UserData", "Age: " + dateCalculator.getAge());
-
 
     }
 

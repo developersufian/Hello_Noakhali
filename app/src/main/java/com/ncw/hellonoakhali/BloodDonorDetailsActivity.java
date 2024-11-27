@@ -1,9 +1,13 @@
 package com.ncw.hellonoakhali;
 
+import static android.content.Intent.getIntent;
 import static com.smarteist.autoimageslider.SliderView.TAG;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 public class BloodDonorDetailsActivity extends AppCompatActivity {
     private String bloodDonorId;
 
-    private TextView tvName, tvEmail;
+    private TextView tvName, tvEmail, tvBloodGroup, tvAddress, tvPhone,  tvLastDonationDate, tvTotalDonationTime, tvAge, tvHeight, tvWeight;
     private ImageView ivProfilePicture;
     DateCalculator dateCalculator;
 
@@ -47,6 +51,14 @@ public class BloodDonorDetailsActivity extends AppCompatActivity {
         tvName = findViewById(R.id.name);
         tvEmail = findViewById(R.id.email);
         ivProfilePicture = findViewById(R.id.img_profile);
+        tvBloodGroup = findViewById(R.id.blood_group);
+        tvAddress = findViewById(R.id.address);
+        tvPhone = findViewById(R.id.phone);
+        tvLastDonationDate = findViewById(R.id.last_donation);
+        tvTotalDonationTime = findViewById(R.id.total_donations);
+        tvAge = findViewById(R.id.age);
+        tvHeight = findViewById(R.id.height);
+        tvWeight = findViewById(R.id.weight);
 
 
         Intent intent = getIntent();
@@ -87,45 +99,37 @@ public class BloodDonorDetailsActivity extends AppCompatActivity {
         String email = userData.getString("email");
         String bloodGroup = userData.getString("blood_group");  // Note: key from the database
         String address = userData.getString("address");
-        String registrationDate = userData.getString("registration_date");
+        //String registrationDate = userData.getString("registration_date");
         String phone = userData.getString("phone");
-        String facebook = userData.getString("facebook");
+        //String facebook = userData.getString("facebook");
         String lastDonationDate = userData.getString("last_donation_date");
         String totalDonationTime = userData.getString("total_donated");
         String dob = userData.getString("dob");
-        String userId = userData.getString("user_id");
+        String height = userData.getString("height");
+        String weight = userData.getString("weight");
+        //String userId = userData.getString("user_id");
         String photoUrl = userData.getString("photo_url");
 
         dateCalculator = new DateCalculator(dob, lastDonationDate);
 
 
-        //tvName.setText(name);
-        //tvEmail.setText(email);
-
         tvName.setText(name);
         tvEmail.setText(email);
         Glide.with(this).load(photoUrl).into(ivProfilePicture);
+        tvBloodGroup.setText(bloodGroup);
+        tvAddress.setText(address);
+        tvPhone.setText(phone);
+        tvLastDonationDate.setText(dateCalculator.getDaysSinceLastDonation() + " Days ago");
+        tvTotalDonationTime.setText(totalDonationTime + " Times");
+        tvAge.setText(dateCalculator.getAge() + " Years");
+        tvHeight.setText(height);
+        tvWeight.setText(weight+" Kg");
 
+        tvPhone.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+            startActivity(intent);
+        });
 
-        Log.d("UserData", "User: " + userId);
-        Log.d("UserData", "Name: " + name);
-        Log.d("UserData", "Email: " + email);
-        Log.d("UserData", "Blood Group: " + bloodGroup);
-        Log.d("UserData", "Address: " + address);
-        Log.d("UserData", "Registration Date: " + registrationDate);
-        Log.d("UserData", "Phone: " + phone);
-        Log.d("UserData", "Facebook: " + facebook);
-        Log.d("UserData", "Last Donation Date: " + lastDonationDate);
-        Log.d("UserData", "Total Donation Time: " + totalDonationTime);
-        Log.d("UserData", "DOB: " + dob);
-        Log.d("UserData", "Photo URL: " + photoUrl);
-
-
-        //Last Donation Date: 19-11-2024 to today, total days
-        //DOB: 30-07-2005 to today total years
-
-        Log.d("UserData", "Days since last donation: " + dateCalculator.getDaysSinceLastDonation());
-        Log.d("UserData", "Age: " + dateCalculator.getAge());
 
 
     }

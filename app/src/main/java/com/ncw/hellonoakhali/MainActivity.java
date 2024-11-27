@@ -2,8 +2,11 @@ package com.ncw.hellonoakhali;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
@@ -85,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Load HomeFragment by default
         replaceFragment(new HomeFragment(), "Home");
+
+
+
     }
 
     // Initialize UI components
@@ -264,4 +272,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.e(TAG, "Sign-in error: " + e.getLocalizedMessage());
         }
     }
+
+
 }

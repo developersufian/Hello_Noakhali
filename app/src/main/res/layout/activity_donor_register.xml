@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
+    android:background="#E0E5EC"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#E0E5EC">
+    android:padding="16dp">
 
 
     <androidx.cardview.widget.CardView
@@ -14,18 +14,26 @@
         android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/soft_ui_background"
         app:cardCornerRadius="60dp"
-        app:cardElevation="8dp"
-        android:background="@drawable/soft_ui_background">
+        app:cardElevation="8dp">
 
         <ImageView
             android:id="@+id/userPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            />
+            android:contentDescription="@string/app_name" />
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Name: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/nameField"
         android:layout_width="match_parent"
@@ -34,10 +42,18 @@
         android:background="@drawable/soft_ui_edit_text"
         android:hint="Name"
         android:inputType="textPersonName"
-        android:padding="12dp"/>
+        android:padding="12dp" />
 
     <!-- Add similar styling for other EditText fields -->
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Phone Number: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/phoneNumber"
         android:layout_width="match_parent"
@@ -46,8 +62,17 @@
         android:background="@drawable/soft_ui_edit_text"
         android:hint="Phone Number"
         android:inputType="phone"
-        android:padding="12dp"/>
+        android:padding="12dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Address: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
@@ -56,7 +81,17 @@
         android:background="@drawable/soft_ui_edit_text"
         android:hint="Address"
         android:inputType="text"
-        android:padding="12dp"/>
+        android:padding="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Facebook Profile Link: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/facebook"
         android:layout_width="match_parent"
@@ -65,7 +100,16 @@
         android:background="@drawable/soft_ui_edit_text"
         android:hint="Facebook Profile Link"
         android:inputType="text"
-        android:padding="12dp"/>
+        android:padding="12dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Date of Birth: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/date_of_birth"
         android:layout_width="match_parent"
@@ -74,7 +118,17 @@
         android:background="@drawable/soft_ui_edit_text"
         android:hint="Date of Birth"
         android:inputType="date"
-        android:padding="12dp"/>
+        android:padding="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Last Date of Donation: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/last_date_of_donation"
         android:layout_width="match_parent"
@@ -83,17 +137,105 @@
         android:background="@drawable/soft_ui_edit_text"
         android:hint="Last Date of Donation"
         android:inputType="date"
-        android:padding="12dp"/>
-
+        android:padding="12dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Total Donations: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/total_donated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:background="@drawable/soft_ui_edit_text"
-        android:hint="Total Donated"
+        android:hint="Total Donation Time"
         android:inputType="phone"
-        android:padding="12dp"/>
+        android:padding="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/gabriela_regular"
+                android:paddingHorizontal="4dp"
+                android:text="Height Ex: 5 feet 11 inches"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/gabriela_regular"
+                android:paddingHorizontal="4dp"
+                android:hint="Height"
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/soft_ui_edit_text"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/gabriela_regular"
+                android:paddingHorizontal="4dp"
+                android:text="Weight Ex: 50"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/gabriela_regular"
+                android:background="@drawable/soft_ui_edit_text"
+                android:paddingHorizontal="4dp"
+                android:inputType="number"
+                android:hint="Weight"
+                android:padding="12dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabriela_regular"
+        android:paddingHorizontal="4dp"
+        android:text="Blood Group: "
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp" />
 
     <Spinner
         android:id="@+id/bloodGroup"
@@ -101,7 +243,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:background="@drawable/soft_ui_edit_text"
-        android:padding="12dp"/>
+        android:padding="12dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerButton"
@@ -109,8 +251,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@drawable/soft_ui_edit_text"
+        android:padding="12dp"
         android:text="Register as Donor"
-        android:textColor="#5D6874"
-        android:padding="12dp"/>
+        android:textColor="#5D6874" />
 
 </LinearLayout>

@@ -2,8 +2,11 @@ package com.ncw.hellonoakhali.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.OnBackInvokedCallback;
 
 import com.bumptech.glide.Glide;
 import com.ncw.hellonoakhali.R;
@@ -49,6 +53,8 @@ public class HomeFragment extends Fragment {
         // Initialize and set the adapter
         sliderAdapter = new SliderAdapter(getContext(), sliderItemList);
         sliderView.setSliderAdapter(sliderAdapter);
+
+
 
         return view;
     }
@@ -107,4 +113,7 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+
+
 }
