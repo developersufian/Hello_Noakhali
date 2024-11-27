@@ -8,6 +8,7 @@
     <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:background="@color/md_theme_background"
         android:tag="menu">
 
         <LinearLayout
@@ -22,7 +23,6 @@
                 android:fontFamily="@font/amita_regular"
                 android:gravity="center"
                 android:text="@string/app_name"
-                android:textColor="@color/white"
                 android:textSize="30sp" />
 
 
@@ -55,7 +55,6 @@
                         android:layout_marginEnd="8dp"
                         android:text=""
                         android:paddingHorizontal="4dp"
-                        android:textColor="@color/white"
                         android:textSize="20sp" />
 
                     <TextView
@@ -66,7 +65,6 @@
                         android:layout_marginEnd="8dp"
                         android:text=""
                         android:paddingHorizontal="4dp"
-                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
 
@@ -82,9 +80,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/colorBackgroundLight"
                 android:text="Connect with Google"
-                android:textColor="@color/colorTextDark"
                 android:textSize="16sp" />
 
 
@@ -100,8 +96,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/home"
-                    app:tint="@color/white" />
+                    android:src="@drawable/home" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -109,7 +104,6 @@
                     android:layout_marginHorizontal="16dp"
                     android:fontFamily="@font/amita_regular"
                     android:text="Home"
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -126,8 +120,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/person"
-                    app:tint="@color/white" />
+                    android:src="@drawable/person" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -135,7 +128,6 @@
                     android:layout_marginHorizontal="16dp"
                     android:fontFamily="@font/amita_regular"
                     android:text="Profile"
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -152,8 +144,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/settings"
-                    app:tint="@color/white" />
+                    android:src="@drawable/settings" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -161,7 +152,6 @@
                     android:layout_marginHorizontal="16dp"
                     android:fontFamily="@font/amita_regular"
                     android:text="Setting"
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -178,8 +168,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/share"
-                    app:tint="@color/white" />
+                    android:src="@drawable/share" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -187,7 +176,6 @@
                     android:layout_marginHorizontal="16dp"
                     android:fontFamily="@font/amita_regular"
                     android:text="Share"
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -204,8 +192,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/logout"
-                    app:tint="@color/white" />
+                    android:src="@drawable/logout" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -213,7 +200,6 @@
                     android:layout_marginHorizontal="16dp"
                     android:fontFamily="@font/amita_regular"
                     android:text="Logout"
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -227,12 +213,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/md_theme_background"
         android:tag="content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background"
             android:orientation="vertical" />
 
 
@@ -248,8 +234,10 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_alignParentBottom="true"
-            app:backgroundColor="@color/colorPrimaryDark"
-            app:indicatorColor="@color/colorPrimary"
+            app:indicatorColor="@color/md_theme_onPrimaryContainer"
+            app:backgroundColor="@color/md_theme_primaryContainer"
+            app:iconTintActive="@color/md_theme_primaryContainer"
+            app:textColor="@color/md_theme_primaryContainer"
             app:indicatorRadius="12dp"
             android:contentDescription="@string/app_name"
             app:menu="@menu/bottom_nav_menu" />

@@ -2,7 +2,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/md_theme_background">
 
     <ImageView
         android:id="@+id/img_profile"
@@ -30,7 +30,6 @@
                 android:fontFamily="@font/amita_regular"
                 android:paddingHorizontal="4dp"
                 android:text=""
-                android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -41,7 +40,6 @@
                 android:fontFamily="@font/gabriela_regular"
                 android:paddingHorizontal="4dp"
                 android:text="Email"
-                android:textColor="@color/colorTextSecondary"
                 android:textSize="14sp" />
 
             <TextView
@@ -53,14 +51,12 @@
                 android:fontFamily="@font/gabriela_regular"
                 android:paddingHorizontal="4dp"
                 android:text=""
-                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="34dp"
-                android:background="@color/white" />
+                android:layout_marginBottom="34dp" />
 
         </LinearLayout>
 
@@ -75,7 +71,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:padding="4dp"
             android:text=""
-            android:textColor="@color/colorRed"
             android:textSize="34sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -98,7 +93,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:paddingHorizontal="4dp"
             android:text="Phone"
-            android:textColor="@color/colorTextSecondary"
             android:textSize="14sp" />
 
         <TextView
@@ -110,7 +104,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:paddingHorizontal="4dp"
             android:text=""
-            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <TextView
@@ -120,7 +113,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:paddingHorizontal="4dp"
             android:text="Address"
-            android:textColor="@color/colorTextSecondary"
             android:textSize="14sp" />
 
         <TextView
@@ -132,7 +124,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:paddingHorizontal="4dp"
             android:text=""
-            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <TextView
@@ -142,7 +133,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:paddingHorizontal="4dp"
             android:text="Age"
-            android:textColor="@color/colorTextSecondary"
             android:textSize="14sp" />
 
         <TextView
@@ -154,7 +144,6 @@
             android:fontFamily="@font/gabriela_regular"
             android:paddingHorizontal="4dp"
             android:text=""
-            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -175,7 +164,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text="Total Donations"
-                    android:textColor="@color/colorTextSecondary"
                     android:textSize="14sp" />
 
                 <TextView
@@ -187,7 +175,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text=""
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -204,7 +191,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text="Last Donation"
-                    android:textColor="@color/colorTextSecondary"
                     android:textSize="14sp" />
 
                 <TextView
@@ -216,7 +202,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text=""
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -240,7 +225,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text="Height"
-                    android:textColor="@color/colorTextSecondary"
                     android:textSize="14sp" />
 
                 <TextView
@@ -252,7 +236,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text=""
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -269,7 +252,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text="Weight"
-                    android:textColor="@color/colorTextSecondary"
                     android:textSize="14sp" />
 
                 <TextView
@@ -281,7 +263,6 @@
                     android:fontFamily="@font/gabriela_regular"
                     android:paddingHorizontal="4dp"
                     android:text=""
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>

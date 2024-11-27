@@ -4,7 +4,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0E5EC"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -32,7 +31,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Name: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/nameField"
@@ -52,7 +50,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Phone Number: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/phoneNumber"
@@ -71,7 +68,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Address: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/address"
@@ -90,7 +86,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Facebook Profile Link: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/facebook"
@@ -108,7 +103,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Date of Birth: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/date_of_birth"
@@ -127,7 +121,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Last Date of Donation: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/last_date_of_donation"
@@ -145,7 +138,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Total Donations: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
     <EditText
         android:id="@+id/total_donated"
@@ -176,7 +168,6 @@
                 android:fontFamily="@font/gabriela_regular"
                 android:paddingHorizontal="4dp"
                 android:text="Height Ex: 5 feet 11 inches"
-                android:textColor="@color/colorTextSecondary"
                 android:textSize="14sp" />
 
             <EditText
@@ -207,7 +198,6 @@
                 android:fontFamily="@font/gabriela_regular"
                 android:paddingHorizontal="4dp"
                 android:text="Weight Ex: 50"
-                android:textColor="@color/colorTextSecondary"
                 android:textSize="14sp" />
 
             <EditText
@@ -234,7 +224,6 @@
         android:fontFamily="@font/gabriela_regular"
         android:paddingHorizontal="4dp"
         android:text="Blood Group: "
-        android:textColor="@color/colorTextSecondary"
         android:textSize="14sp" />
 
     <Spinner
