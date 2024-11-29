@@ -3,9 +3,11 @@ package com.ncw.hellonoakhali;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,13 +21,18 @@ import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +41,7 @@ import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +53,7 @@ import com.ncw.hellonoakhali.fragment.BloodRequestFragment;
 import com.ncw.hellonoakhali.fragment.HomeFragment;
 import com.ncw.hellonoakhali.fragment.NewsFragment;
 import com.ncw.hellonoakhali.fragment.ProfileFragment;
+import com.ncw.hellonoakhali.fragment.SettingsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,14 +61,13 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
-import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     // UI Elements
     private SmoothBottomBar smoothBottomBar;
     private ImageView img_drawer;
-    private DuoDrawerLayout drawerLayout;
+
     private TextView name, email;
     private LinearLayout menu_header;
     private CircleImageView picture;
@@ -77,39 +85,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initializeUI();
-        setupFirebase();
-        setupGoogleSignIn();
-        setupDrawerMenu();
-        setupBottomNavigation();
-
-        // Load HomeFragment by default
-        replaceFragment(new HomeFragment(), "Home");
-
-
-
-    }
-
-    // Initialize UI components
-    private void initializeUI() {
         drawerLayout = findViewById(R.id.drawer_layout);
         img_drawer = findViewById(R.id.img_drawer);
         smoothBottomBar = findViewById(R.id.bottom_navigation);
-
-        View menuView = drawerLayout.getMenuView();
-        name = menuView.findViewById(R.id.name);
-        email = menuView.findViewById(R.id.email);
-        picture = menuView.findViewById(R.id.picture);
-        btn_login = menuView.findViewById(R.id.btn_login);
-        menu_header = menuView.findViewById(R.id.menu_header);
+        navigationView = findViewById(R.id.nav_view);
 
         img_drawer.setOnClickListener(v -> toggleDrawer());
+
+
+        setupDrawerMenu();
+        setupFirebase();
+        setupGoogleSignIn();
+        setupBottomNavigation();
+
+        // Load HomeFragment by default
+        if (savedInstanceState == null) {
+            replaceFragment(new HomeFragment());
+        }
+
+        // Drawer item click listener
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_home) {
+                replaceFragment(new HomeFragment());
+            } else if (item.getItemId() == R.id.nav_profile) {
+                replaceFragment(new ProfileFragment());
+            } else if (item.getItemId() == R.id.nav_settings) {
+                replaceFragment(new SettingsFragment());
+            } else if (item.getItemId() == R.id.nav_logout) {
+                logoutUser();
+            }
+            drawerLayout.closeDrawer(GravityCompat.START);  // Close drawer after item click
+            return true;
+        });
     }
+
 
     // Setup Firebase Authentication and Database
     private void setupFirebase() {
@@ -124,27 +141,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Configure Google One-Tap Sign-In
     private void setupGoogleSignIn() {
         oneTapClient = Identity.getSignInClient(this);
-        signInRequest = BeginSignInRequest.builder()
-                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                        .setSupported(true)
-                        .setServerClientId(getString(R.string.default_web_client_id))
-                        .setFilterByAuthorizedAccounts(false)
-                        .build())
-                .setAutoSelectEnabled(false)
-                .build();
+        signInRequest = BeginSignInRequest.builder().setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder().setSupported(true).setServerClientId(getString(R.string.default_web_client_id)).setFilterByAuthorizedAccounts(false).build()).setAutoSelectEnabled(false).build();
 
-        btn_login.setOnClickListener(v -> startGoogleSignIn());
+        // Ensure this is only done after btn_login is initialized
+        if (btn_login != null) {
+            btn_login.setOnClickListener(v -> startGoogleSignIn());
+        } else {
+            Log.e(TAG, "btn_login is not initialized");
+        }
     }
 
     // Setup Drawer Menu and Click Listeners
     private void setupDrawerMenu() {
-        View menuView = drawerLayout.getMenuView();
+        View headerView = navigationView.getHeaderView(0);
+        menu_header = headerView.findViewById(R.id.menu_header);
+        name = headerView.findViewById(R.id.name);
+        email = headerView.findViewById(R.id.email);
+        picture = headerView.findViewById(R.id.picture);
+        btn_login = headerView.findViewById(R.id.btn_login);
 
-        menuView.findViewById(R.id.ll_Home).setOnClickListener(this);
-        menuView.findViewById(R.id.ll_Profile).setOnClickListener(this);
-        menuView.findViewById(R.id.ll_Setting).setOnClickListener(this);
-        menuView.findViewById(R.id.ll_Share).setOnClickListener(this);
-        menuView.findViewById(R.id.ll_Logout).setOnClickListener(this);
+        // Ensure that btn_login is initialized
+        if (btn_login != null) {
+            btn_login.setOnClickListener(v -> startGoogleSignIn());
+        } else {
+            Log.e(TAG, "btn_login is null in the drawer menu header");
+        }
     }
 
     // Setup Bottom Navigation Bar
@@ -152,16 +173,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         smoothBottomBar.setOnItemSelectedListener((OnItemSelectedListener) position -> {
             switch (position) {
                 case 0:
-                    replaceFragment(new HomeFragment(), "Home");
+                    replaceFragment(new HomeFragment());
                     break;
                 case 1:
-                    replaceFragment(new NewsFragment(), "News");
+                    replaceFragment(new NewsFragment());
                     break;
                 case 2:
-                    replaceFragment(new BloodRequestFragment(), "Blood Request");
+                    replaceFragment(new BloodRequestFragment());
                     break;
                 case 3:
-                    replaceFragment(new BloodDonorFragment(), "Blood Donor");
+                    replaceFragment(new BloodDonorFragment());
                     break;
             }
             return true;
@@ -171,20 +192,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Update UI based on Firebase User
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            Log.d(TAG, "User is logged in: " + user.getDisplayName());
+
             btn_login.setVisibility(View.GONE);
             menu_header.setVisibility(View.VISIBLE);
             name.setText(user.getDisplayName());
             email.setText(user.getEmail());
             Glide.with(this).load(user.getPhotoUrl()).into(picture);
 
-
         } else {
-            btn_login.setVisibility(View.VISIBLE);
-            menu_header.setVisibility(View.GONE);
+            Log.d(TAG, "User is not logged in.");
+            if (btn_login != null) {
+                btn_login.setVisibility(View.VISIBLE);
+            }
+            if (menu_header != null) {
+                menu_header.setVisibility(View.GONE);
+            }
         }
-
-
-
     }
 
     // Drawer Toggle
@@ -197,34 +221,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Replace Fragments
-    private void replaceFragment(Fragment fragment, String tag) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(tag);
-        transaction.commit();
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
-
-    // Handle Drawer Menu Clicks
-
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.ll_Home) {
-            replaceFragment(new HomeFragment(), "Home");
-        } else if (id == R.id.ll_Profile) {
-            replaceFragment(new ProfileFragment(), "Profile");
-        } else if (id == R.id.ll_Setting) {
-            replaceFragment(new NewsFragment(), "News");
-        } else if (id == R.id.ll_Share) {
-            Toast.makeText(this, "Share...", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.ll_Logout) {
-            logoutUser();
-
-        }
-        drawerLayout.closeDrawer();
-    }
-
 
     // Log out the user
     private void logoutUser() {
@@ -260,18 +262,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String idToken = credential.getGoogleIdToken();
             if (idToken != null) {
                 AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
-                mAuth.signInWithCredential(firebaseCredential).addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        updateUI(mAuth.getCurrentUser());
-                    } else {
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                    }
-                });
+                mAuth.signInWithCredential(firebaseCredential)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                updateUI(mAuth.getCurrentUser());  // Ensure you're passing the updated FirebaseUser
+                            } else {
+                                Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            }
+                        });
             }
         } catch (ApiException e) {
-            Log.e(TAG, "Sign-in error: " + e.getLocalizedMessage());
+            Log.e(TAG, "Google Sign-In failed: " + e.getLocalizedMessage());
         }
     }
-
-
 }

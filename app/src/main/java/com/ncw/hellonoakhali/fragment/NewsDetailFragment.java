@@ -55,16 +55,7 @@ public class NewsDetailFragment extends Fragment {
         // Initialize the RequestQueue for making network requests
         requestQueue = Volley.newRequestQueue(getContext());
         loadNewsDetails(newsId);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-            if (((AppCompatActivity) requireActivity()).getSupportActionBar() != null) {
-                ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
 
-            // Handle back button click
-            toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
-        }
 
         return view;
     }

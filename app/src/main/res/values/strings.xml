@@ -4,10 +4,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="default_web_client_id">129668928139-gbgnj6vu5eg83cdhqa28pepmfp99h829.apps.googleusercontent.com</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
     <string name="hello_noakhali_home">Hello, Noakhali! Home</string>
     <string name="web_url">http://192.168.0.102/Hello_Noakhali/</string>
 
+
+    <string-array name="theme_names">
+        <item>Light Theme</item>
+        <item>Dark Theme</item>
+        <item>Green-Blue Theme</item>
+        <item>Purple-Pink Theme</item>
+        <item>Blue-Neutral Theme</item>
+    </string-array>
 
 </resources>

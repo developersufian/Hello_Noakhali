@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BloodDonorAdapter extends RecyclerView.Adapter<BloodDonorAdapter.BloodDonorViewHolder> {
 
-    private List<BloodDonor> bloodDonorList;
+    private final List<BloodDonor> bloodDonorList;
 
     // Constructor
     public BloodDonorAdapter(List<BloodDonor> bloodDonorList) {

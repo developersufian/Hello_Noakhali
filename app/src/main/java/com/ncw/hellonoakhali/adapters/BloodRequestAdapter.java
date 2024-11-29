@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BloodRequestAdapter extends RecyclerView.Adapter<BloodRequestAdapter.ViewHolder> {
 
-    private List<BloodRequest> bloodRequestList;
+    private final List<BloodRequest> bloodRequestList;
 
     public BloodRequestAdapter(List<BloodRequest> bloodRequestList) {
         this.bloodRequestList = bloodRequestList;
